@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ordem de culto</title>
+<style>
+:root{--bg:#f1f2f7;--sf:#fff;--ink:#1b2340;--mut:#5d6684;--ac:#2f4aa8;--on:#fff;--ln:#d6d9e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151f;--sf:#1b2030;--ink:#e8eaf2;--mut:#a0a8c4;--ac:#9db1ff;--on:#101428;--ln:#2e3550}}
+:root[data-theme="dark"]{--bg:#12151f;--sf:#1b2030;--ink:#e8eaf2;--mut:#a0a8c4;--ac:#9db1ff;--on:#101428;--ln:#2e3550}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 48px;display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:880px){main{grid-template-columns:minmax(0,1fr) minmax(0,420px);align-items:start}.pv{position:sticky;top:16px}}
+h1{font:700 26px Georgia,"Times New Roman",serif;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 14px;font-size:14px}
+section{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:16px;margin-bottom:16px}
+h2{font-size:16px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--mut);margin-bottom:10px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--ln);border-radius:8px;padding:9px 10px;margin-top:3px}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.it{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding:10px 0;border-top:1px solid var(--ln)}
+.it:first-of-type{border-top:0}
+.it input{margin:0}
+.it .r{grid-column:1/2}
+.it .b{display:flex;gap:6px;justify-content:flex-end;grid-column:2/3}
+.it textarea{margin:0;grid-column:1/3;min-height:0}
+.it .r{grid-column:1/3}
+.it .b{grid-column:1/3}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--ln);background:var(--sf);color:var(--ink);padding:8px 12px}
+button.p{background:var(--ac);color:var(--on);border-color:var(--ac);font-weight:600}
+.sm{padding:5px 10px;font-size:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+textarea#saida{min-height:230px;font-size:14px;line-height:1.5}
+img#pv{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--ln)}
+.msg{font-size:13px;color:var(--mut);min-height:18px;margin-top:8px}
+details summary{cursor:pointer;font-weight:600}
+details ul{margin:10px 0 0;padding-left:20px;font-size:14px;color:var(--mut)}
+details li{margin-bottom:6px}
+.it .r,.it .b,.it textarea{grid-column:1/-1}
+</style>
+</head>
+<body>
+<main>
+<div>
+  <h1>Ordem de culto</h1>
+  <p class="sub">Preencha os dados e copie o texto ou baixe a imagem. O que você digitar fica salvo neste aparelho.</p>
+  <section>
+    <details open>
+      <summary>Como preencher</summary>
+      <ul>
+        <li><b>Dados do culto:</b> informe igreja, tipo, data e horário. Tema e observações são opcionais.</li>
+        <li><b>Programação:</b> cada item tem nome e responsável (opcional). Use ↑ e ↓ para mudar a ordem.</li>
+        <li><b>Subitens:</b> um por linha. Para músicas, escreva só o nome. Para um momento especial, comece com * (ex.: * Palavra pastoral | Pr. João). O que vem depois da barra | é o responsável. Para um detalhe menor logo abaixo do subitem (como o autor da música), comece a linha com > (ex.: &gt; Autor: Fulano).</li>
+        <li><b>Resultado:</b> a imagem e o texto são atualizados enquanto você digita. Use Baixar imagem e Copiar texto.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section>
+    <h2>Dados do culto</h2>
+    <label>Igreja<input id="igreja" placeholder="Nome da igreja"></label>
+    <label>Tipo de culto<input id="tipo" value="Culto de domingo"></label>
+    <div class="g2">
+      <label>Data<input id="data" type="date"></label>
+      <label>Horário<input id="hora" value="19:00"></label>
+    </div>
+    <label>Tema ou versículo<input id="tema" placeholder="Opcional"></label>
+    <label>Observações<textarea id="obs" rows="2" placeholder="Avisos, convites, Santa Ceia…"></textarea></label>
+    <label>Assinatura no rodapé da imagem<input id="assin" value="Ministério de Adoração" placeholder="Deixe vazio para não exibir"></label>
+    <label>Cores da imagem
+      <select id="cor">
+        <option value="marinho">Azul-marinho e dourado</option>
+        <option value="creme">Marfim e verde</option>
+        <option value="branco">Branco e azul</option>
+        <option value="vinho">Vinho e areia</option>
+        <option value="amarelo">Amarelo e laranja</option>
+      </select>
+    </label>
+    <label>Fundo da imagem
+      <select id="fundo">
+        <option value="solido">Cor sólida</option>
+        <option value="grad">Degradê inclinado</option>
+      </select>
+    </label>
+  </section>
+
+  <section>
+    <h2>Programação</h2>
+    <div id="lista"></div>
+    <div class="row"><button class="sm" id="add">Adicionar item</button></div>
+  </section>
+</div>
+
+<div class="pv">
+  <section>
+    <h2>Imagem pronta</h2>
+    <img id="pv" alt="Prévia da ordem de culto">
+    <div class="row"><button class="p" id="baixar">Baixar imagem</button></div>
+    <div class="msg" id="m1"></div>
+  </section>
+  <section>
+    <h2>Texto pronto</h2>
+    <textarea id="saida" aria-label="Texto da ordem de culto"></textarea>
+    <div class="row"><button class="p" id="copiar">Copiar texto</button></div>
+    <div class="msg" id="m2"></div>
+  </section>
+</div>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const FONT="Georgia,'Times New Roman',serif",SANS="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif";
+const KEYS=['igreja','tipo','data','hora','tema','obs','cor','fundo','assin'];
+const TH={
+ marinho:{bg:'#14213d',b2:'#2d4a85',ac:'#e0b44c',tx:'#ffffff',sb:'#c5cbe0',ln:'rgba(255,255,255,.2)'},
+ creme:{bg:'#fbf8f0',b2:'#e1eedf',ac:'#2f6f4f',tx:'#25302a',sb:'#69776e',ln:'rgba(0,0,0,.14)'},
+ branco:{bg:'#ffffff',b2:'#d6e6fb',ac:'#1f5fbf',tx:'#16202e',sb:'#667085',ln:'rgba(0,0,0,.12)'},
+ amarelo:{bg:'#fff3d1',b2:'#ffd7a3',ac:'#a63f06',tx:'#3a2a18',sb:'#6b5238',ln:'rgba(58,42,24,.2)'},
+ vinho:{bg:'#561828',b2:'#8e2f49',ac:'#f1d3a0',tx:'#ffffff',sb:'#e8c9cf',ln:'rgba(255,255,255,.22)'}
+};
+let S={items:[
+ {n:'Boas-vindas',r:''},
+ {n:'Louvor e adoração',r:''},
+ {n:'Oração',r:''},
+ {n:'Leitura bíblica',r:''},
+ {n:'Mensagem',r:''},
+ {n:'Ofertas e avisos',r:''},
+ {n:'Bênção final',r:''}
+]};
+const v=k=>$(k).value.trim();
+
+/* data padrão: próximo domingo */
+(function(){const d=new Date();d.setDate(d.getDate()+((7-d.getDay())%7));
+ $('data').value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})();
+
+/* carregar salvo */
+try{const s=JSON.parse(localStorage.getItem('odc')||'null');
+ if(s){KEYS.forEach(k=>{if(s.f&&s.f[k]!=null)$(k).value=s.f[k]});if(Array.isArray(s.items)&&s.items.length)S.items=s.items}}catch(e){}
+
+function save(){try{const f={};KEYS.forEach(k=>f[k]=$(k).value);localStorage.setItem('odc',JSON.stringify({f,items:S.items}))}catch(e){}}
+
+function dataExt(){
+ if(!$('data').value)return '';
+ const s=new Date($('data').value+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ return s.charAt(0).toUpperCase()+s.slice(1);
+}
+function quando(){const d=dataExt(),h=v('hora');return d&&h?d+' às '+h:(d||h)}
+
+function lista(){
+ const el=$('lista');el.innerHTML='';
+ S.items.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='it';d.dataset.i=i;
+  d.innerHTML='<input data-f="n" placeholder="Item (ex.: Louvor)" aria-label="Item"><input class="r" data-f="r" placeholder="Responsável (opcional)" aria-label="Responsável"><textarea data-f="s" rows="3" placeholder="Um por linha. Músicas: só o nome. Momento especial: comece com * (ex.: * Palavra pastoral | Pr. João). Detalhe menor (autor): comece com >" aria-label="Subitens"></textarea><div class="b"><button class="sm" data-a="up" aria-label="Subir">↑</button><button class="sm" data-a="dn" aria-label="Descer">↓</button><button class="sm" data-a="rm" aria-label="Remover">Remover</button></div>';
+  d.querySelector('[data-f=n]').value=it.n;d.querySelector('[data-f=r]').value=it.r;d.querySelector('[data-f=s]').value=it.s||'';
+  el.appendChild(d);
+ });
+}
+$('lista').addEventListener('input',e=>{const r=e.target.closest('.it');if(!r)return;S.items[+r.dataset.i][e.target.dataset.f]=e.target.value;out()});
+$('lista').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;const i=+b.closest('.it').dataset.i,a=b.dataset.a,L=S.items;
+ if(a==='rm')L.splice(i,1);
+ if(a==='up'&&i>0)[L[i-1],L[i]]=[L[i],L[i-1]];
+ if(a==='dn'&&i<L.length-1)[L[i+1],L[i]]=[L[i],L[i+1]];
+ lista();out();
+});
+$('add').onclick=()=>{S.items.push({h:'',n:'',r:''});lista();out();const n=document.querySelectorAll('#lista .it');n[n.length-1].querySelector('[data-f=n]').focus()};
+KEYS.forEach(k=>$(k).addEventListener('input',out));
+
+/* texto (formato WhatsApp) */
+function texto(){
+ const L=[],it=S.items.filter(i=>i.n.trim());
+ if(v('igreja'))L.push('*'+v('igreja').toUpperCase()+'*');
+ L.push('_'+(v('tipo')||'Ordem de culto')+'_');
+ if(quando())L.push('📅 '+quando());
+ if(v('tema'))L.push('📖 '+v('tema'));
+ L.push('','*ORDEM DE CULTO*','');
+ it.forEach(i=>{L.push('• '+i.n.trim()+(i.r.trim()?' — _'+i.r.trim()+'_':''));(i.s||'').split('\n').map(x=>x.trim()).filter(Boolean).forEach(x=>{if(x[0]==='>'){L.push('         _'+x.slice(1).trim()+'_');return}const m=x[0]==='*',q=m?x.slice(1).trim():x,k=q.indexOf('|'),a=(k<0?q:q.slice(0,k)).trim(),b=k<0?'':q.slice(k+1).trim();L.push(m?'      ◆ *'+a+'*'+(b?' — _'+b+'_':''):'      – '+a+(b?' — _'+b+'_':''))})});
+ if(v('obs'))L.push('','📌 '+v('obs'));
+ return L.join('\n');
+}
+
+/* imagem */
+function wrap(g,s,w){const o=[];s.split('\n').forEach(p=>{let l='';p.split(' ').forEach(x=>{const t=l?l+' '+x:x;if(g.measureText(t).width>w&&l){o.push(l);l=x}else l=t});o.push(l)});return o}
+function fit(g,s,w){if(g.measureText(s).width<=w)return s;while(s.length>1&&g.measureText(s+'…').width>w)s=s.slice(0,-1);return s+'…'}
+
+function draw(g,t,H){
+ const W=860,P=72,mw=W-2*P,it=S.items.filter(i=>i.n.trim());
+ let f=t.bg;if(v('fundo')==='grad'){f=g.createLinearGradient(0,0,W,H);f.addColorStop(0,t.bg);f.addColorStop(1,t.b2)}g.fillStyle=f;g.fillRect(0,0,W,6000);g.textBaseline='alphabetic';
+ let y=130;
+ if(v('igreja')){g.fillStyle=t.ac;g.font='600 30px '+SANS;g.letterSpacing='4px';g.fillText(fit(g,v('igreja').toUpperCase(),mw),P,y);g.letterSpacing='0px';y+=84}
+ g.fillStyle=t.tx;g.font='700 72px '+FONT;g.fillText(fit(g,v('tipo')||'Ordem de culto',mw),P,y);
+ y+=26;g.fillStyle=t.ac;g.fillRect(P,y,120,6);y+=62;
+ if(quando()){g.fillStyle=t.sb;g.font='500 34px '+SANS;g.fillText(fit(g,quando(),mw),P,y);y+=30}
+ if(v('tema')){g.fillStyle=t.tx;g.font='italic 38px '+FONT;y+=20;wrap(g,'“'+v('tema')+'”',mw).forEach(l=>{y+=52;g.fillText(l,P,y)});y+=10}
+ y+=50;g.strokeStyle=t.ln;g.lineWidth=2;
+ g.beginPath();g.moveTo(P,y);g.lineTo(W-P,y);g.stroke();
+ it.forEach(i=>{
+  const r=i.r.trim(),su=(i.s||'').split('\n').map(x=>x.trim()).filter(Boolean),nb=y+(r?50:56);let cu=nb;
+  
+  g.fillStyle=t.tx;g.font='600 40px '+SANS;g.fillText(fit(g,i.n.trim(),mw),P,nb);
+  if(r){cu+=44;g.fillStyle=t.sb;g.font='italic 400 30px '+SANS;g.fillText(fit(g,r,mw),P,cu)}su.forEach(x=>{if(x[0]==='>'){cu+=36;g.font='italic 400 25px '+SANS;g.fillStyle=t.sb;g.fillText(fit(g,x.slice(1).trim(),mw-58),P+58,cu);return}const m=x[0]==='*',q=m?x.slice(1).trim():x,k=q.indexOf('|'),a=(k<0?q:q.slice(0,k)).trim(),b=k<0?'':q.slice(k+1).trim(),ox=P+28+(m?30:0);cu+=m?50:42;let w=0;if(b){g.font='italic 400 30px '+SANS;w=g.measureText(b).width+16}g.font=(m?'700 32px ':'400 30px ')+SANS;const s=fit(g,(m?'':'– ')+a,mw-28-(m?30:0)-w);g.fillStyle=m?t.ac:t.tx;g.fillText(s,ox,cu);if(m){g.beginPath();g.moveTo(P+36,cu-22);g.lineTo(P+44,cu-13);g.lineTo(P+36,cu-4);g.lineTo(P+28,cu-13);g.closePath();g.fill()}if(b){const sw=g.measureText(s).width;g.font='italic 400 30px '+SANS;g.fillStyle=t.sb;g.fillText(b,ox+sw+16,cu)}});const rh=cu-y+30;
+  y+=rh;g.beginPath();g.moveTo(P,y);g.lineTo(W-P,y);g.stroke();
+ });
+ if(v('obs')){y+=30;g.fillStyle=t.sb;g.font='400 32px '+SANS;wrap(g,v('obs'),mw).forEach(l=>{y+=46;g.fillText(l,P,y)});y+=10}
+ if(v('assin')){y+=60;g.save();g.globalAlpha=.85;g.fillStyle=t.sb;g.font='500 24px '+SANS;g.letterSpacing='3px';g.textAlign='center';g.fillText(fit(g,v('assin'),mw),W/2+1.5,y);g.restore()}return y+(v('assin')?80:90);
+}
+const cv=document.createElement('canvas');cv.width=860;
+let tm;
+function out(){
+ save();$('saida').value=texto();
+ clearTimeout(tm);tm=setTimeout(()=>{
+  const t=TH[$('cor').value],g=cv.getContext('2d');
+  cv.height=6000;const H=draw(g,t,6000);cv.height=H;draw(cv.getContext('2d'),t,H);
+  $('pv').src=cv.toDataURL('image/png');
+ },120);
+}
+
+/* ações */
+let DL=null;
+(async()=>{try{if(window.claude)DL=await window.claude.use('downloads')}catch(e){}
+ if(!DL){$('baixar').style.display='none';$('m1').textContent='Segure a imagem (ou clique com o botão direito) para salvar.'}})();
+$('baixar').onclick=()=>{
+ cv.toBlob(async b=>{
+  try{await DL.save({filename:'ordem-de-culto.png',data:b});$('m1').textContent='Imagem salva.'}
+  catch(e){$('m1').textContent=e&&e.code==='declined'?'Download cancelado.':'Não foi possível baixar. Segure a imagem para salvar.'}
+ },'image/png');
+};
+$('copiar').onclick=async()=>{
+ const ta=$('saida');let ok=false;
+ try{await navigator.clipboard.writeText(ta.value);ok=true}catch(e){}
+ if(!ok){try{ta.select();ok=document.execCommand('copy')}catch(e){}}
+ $('m2').textContent=ok?'Texto copiado.':'Não foi possível copiar. Selecione o texto e copie manualmente.';
+};
+
+lista();out();
+</script>
+</body>
+</html>
